@@ -153,6 +153,16 @@ for name in file_names:
     print(name)
 
     image1 = Image(name)
+
+    raw_file = Path('converted/{}.jpg'.format(image1.path.name))
+    cv2.imwrite(raw_file.as_posix(), image1.color)
+
+    out_file = Path(
+        'converted/{}.{}.jpg'.format(image.path.name, image1.path.name))
+
+    if out_file.is_file():
+        continue
+
     X, pos = fetch_all(image1)
 
     rgb = []
@@ -172,27 +182,22 @@ for name in file_names:
     for p, r in tqdm(zip(pos, rgb)):
         mat[p[0], p[1]] = r * 255
 
-    out_file = Path(
-        'converted/{}.{}.jpg'.format(image.path.name, image1.path.name))
     cv2.imwrite(out_file.as_posix(), cv2.cvtColor(mat, cv2.COLOR_RGB2BGR))
-
-    raw_file = Path('converted/{}.jpg'.format(image1.path.name))
-    cv2.imwrite(raw_file.as_posix(), image1.color)
 
     print('Saved new files into {}, {}'.format(out_file, raw_file))
 
 
 # %%
-if __name__ == '__main__':
-    plt.imshow(mat)
-    plt.show()
+# if __name__ == '__main__':
+#     plt.imshow(mat)
+#     plt.show()
 
-    image.plot()
-    plt.tight_layout()
-    plt.show()
+#     image.plot()
+#     plt.tight_layout()
+#     plt.show()
 
-    image1.plot()
-    plt.tight_layout()
-    plt.show()
+#     image1.plot()
+#     plt.tight_layout()
+#     plt.show()
 
 # %%

@@ -14,8 +14,12 @@ file_names
 
 # %%
 
+# The default_position controls ROI of the picture,
+# the picture will be cut to fit the rect.
+# The format is the 4x rect, (x, y, w, h)
+
 default_position = (0, 0, 10000, 10000)
-default_position = (200, 580, 700, 700)
+# default_position = (200, 580, 700, 700)
 
 
 class Image(object):
